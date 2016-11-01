@@ -13,23 +13,11 @@ namespace ArduinoBot
 
             var token = File.ReadAllText(tokenpath);
             token = token.Substring(0, token.Length - 1);
-            TelegramBotClient bot = new TelegramBotClient(token);
+            ArduinoBot bot = new ArduinoBot(token);
 
             CancellationTokenSource source = new CancellationTokenSource();
 
             bot.StartReceiving(source.Token);
-            bot.OnMessage += (sender, e) =>
-            {
-                    if (e.Message.Text == "/start") 
-                    {
-                        bot.SendTextMessageAsync(e.Message.Chat.Id,string.Format("Hallo {0}",e.Message.From.FirstName));
-                    }
-                    else 
-                    {
-                        bot.SendTextMessageAsync(e.Message.Chat.Id,"Ich kann dich leider nicht verstehen");
-                    }
-            };
-
             Console.ReadLine();
             source.Cancel();
 
