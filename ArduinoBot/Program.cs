@@ -18,7 +18,9 @@ namespace ArduinoBot
             CancellationTokenSource source = new CancellationTokenSource();
 
             bot.StartReceiving(source.Token);
+            Console.WriteLine("Bot wurde gestartet.");
             Console.ReadLine();
+            Console.WriteLine("Bot wird beendet");
             source.Cancel();
 
         }
