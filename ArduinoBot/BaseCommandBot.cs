@@ -10,11 +10,13 @@ namespace ArduinoBot
     {
         public CommandManager CommandManager { get; private set; }
 
+        public BotUserManager UserManager { get; private set; }
 
 
         public BaseCommandBot(string token) : base(token)
         {
             CommandManager = new CommandManager();
+            UserManager = new BotUserManager();
         }
 
 
@@ -29,20 +31,24 @@ namespace ArduinoBot
 
         private void OnMessage(Message e)
         {
+            var user = UserManager.GetUser(e.From, e.Chat.Id);
+            var eventargs = new MessageEventArgs(e, user);
+
             if (e.Text.StartsWith("/"))
             {
                 var command = e.Text.Remove(0, 1);
                 if (CommandManager.Commands.ContainsKey(command))
                 {
-                    CommandManager.Commands[command].Invoke(e);
+
+
+                    CommandManager.Commands[command].Invoke(this,eventargs);
                     return;
                 }
             }
-
-            OnDefault(e);
+            OnDefault(eventargs);
         }
 
-        protected virtual void OnDefault(Message message)
+        protected virtual void OnDefault(MessageEventArgs message)
         {
         }
     }

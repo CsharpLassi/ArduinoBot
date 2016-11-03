@@ -12,14 +12,14 @@ namespace ArduinoBot
             CommandManager["start"] += OnStart;
         }
 
-        private void OnStart(Message message)
+        private void OnStart(object sender,MessageEventArgs message)
         {
-            SendTextMessageAsync(message.Chat.Id,string.Format("Hallo {0}",message.From.FirstName));
+            SendTextMessageAsync(message.User.ChatID,string.Format("Hallo {0}",message.User.Username));
         }
 
-        protected override void OnDefault(Message message)
+        protected override void OnDefault(MessageEventArgs message)
         {
-            SendTextMessageAsync(message.Chat.Id,"Ich kann dich leider nicht verstehen");
+            SendTextMessageAsync(message.User.ChatID,"Ich kann dich leider nicht verstehen");
         }
     }
 }

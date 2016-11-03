@@ -4,15 +4,17 @@ using System.Collections.Generic;
 
 namespace ArduinoBot
 {
+    
+
     public class CommandManager
     {
-        public Dictionary<string,Action<Message>> Commands { get; private set; }
+        public Dictionary<string,MessageEventHandler> Commands { get; private set; }
 
-        public Action<Message> this[string index]
+        public MessageEventHandler this[string index]
         {
             get
             {
-                Action<Message> @out;
+                MessageEventHandler @out;
                 Commands.TryGetValue(index,out @out);
                 return @out;
             }
@@ -27,7 +29,7 @@ namespace ArduinoBot
 
         public CommandManager()
         {
-            Commands = new Dictionary<string, Action<Message>>();
+            Commands = new Dictionary<string, MessageEventHandler>();
         }
     }
 }
