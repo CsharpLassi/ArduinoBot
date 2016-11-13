@@ -53,6 +53,7 @@
     <Compile Include="BotUser.cs" />
     <Compile Include="BotUserManager.cs" />
     <Compile Include="MessageEvent.cs" />
+    <Compile Include="ArduinoManager.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
