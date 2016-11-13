@@ -25,7 +25,7 @@ namespace ArduinoBot
             SendTextMessageAsync(message.User.ChatID,"Aktuell verbunden ist:");
             foreach (var board in ArduinoManager.Boards)
             {
-                SendTextMessageAsync(message.User.ChatID,string.Format("->{0}",board.Name));
+                SendTextMessageAsync(message.User.ChatID,string.Format("{0} V:{1}",board.Name,board.Version));
             }
 
         }

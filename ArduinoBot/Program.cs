@@ -17,7 +17,7 @@ namespace ArduinoBot
             foreach (var port in ports)
             {
                 var board = manager.OpenArduino(port);
-                Console.WriteLine("Board gefunden:{0}",board.Name);
+                Console.WriteLine("Board gefunden:{0}",board.Port);
             }
 
             var tokenpath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), ".develop", "bottoken");
