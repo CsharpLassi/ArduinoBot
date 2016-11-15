@@ -29,9 +29,12 @@ namespace ArduinoBot
 
             public void Start()
             {
-                while (_sr.ReadChar() != 'w');
+                Thread.Sleep(1000);
+                while (_sr.ReadChar() != 'w')
+                    Thread.Sleep(100);
                 _sw.Write('s');
-                while (_sr.ReadChar() != 'o');
+                while (_sr.ReadChar() != 'o')
+                    Thread.Sleep(100);
                 Version = Version.Parse(ReadString());
                 Name = ReadString();
 
