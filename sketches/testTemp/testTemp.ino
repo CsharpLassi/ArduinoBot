@@ -3,6 +3,8 @@
 //
 // April 2012, Arduino 1.0
 
+const double QUANTILE = 2.262;
+
 void setup()
 {
   Serial.begin(9600);
@@ -13,7 +15,36 @@ void setup()
 void loop()
 {
   // Show the temperature in degrees Celsius.
-  Serial.println(GetTemp(),1);
+
+  double values[10]; 
+  double average = 0.0;
+  double delta = 0.0;
+  double stddelta = 0.0; 
+  double range = 0.0;
+  for(int i = 0; i < 10; i++)
+  {
+    double value = GetTemp();
+    values[i] = value;
+    average += value;
+  }
+
+  //Mittelwert
+  average = average / 10;
+
+  //Standarabweichung
+  for(int i = 0; i < 10; i++)
+  {
+    double diff = (values[i]-average);
+    delta += diff * diff ;
+  }
+
+  delta = sqrt(delta/9);
+  stddelta = delta / sqrt(10);
+  range = stddelta * QUANTILE;
+  
+  
+  Serial.println(average ,1);
+  Serial.println(range ,1);
   delay(1000);
 }
 
@@ -40,7 +71,6 @@ double GetTemp(void)
 
   // Reading register "ADCW" takes care of how to read ADCL and ADCH.
   wADC = ADCW;
-
   // The offset of 324.31 could be wrong. It is just an indication.
   t = (wADC - 324.31 ) / 1.22;
 
