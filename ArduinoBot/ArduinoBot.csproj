@@ -54,9 +54,16 @@
     <Compile Include="BotUserManager.cs" />
     <Compile Include="MessageEvent.cs" />
     <Compile Include="ArduinoManager.cs" />
+    <Compile Include="DataID.cs" />
+    <Compile Include="DataHeader.cs" />
+    <Compile Include="DataEntry.cs" />
+    <Compile Include="DataEntries\TemperaturEntry.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DataEntries\" />
   </ItemGroup>
 </Project>
